@@ -1,11 +1,11 @@
-import type { ElementType } from 'react';
+import { useEffect, type ElementType } from 'react';
 import styled from 'styled-components';
 import { CiBoxList } from 'react-icons/ci';
-import { Flex } from '@sanity/ui';
+import { Box, Flex, Heading, Stack, useTheme, Text } from '@sanity/ui';
 
 const StyledItemAssetWrapper = styled.div`
-  border: 1px solid var(--card-border-color);
-  min-height: 50px;
+  border-bottom: 1px solid var(--card-border-color);
+  min-height: 100px;
   max-height: 400px;
   height: 100%;
   width: 100%;
@@ -23,22 +23,33 @@ const StyledItemAssetWrapper = styled.div`
 export function ItemAssetWrapper({
   assetUrl,
   icon,
-}: Readonly<{ assetUrl?: string; icon?: ElementType }>) {
+  title,
+}: Readonly<{ assetUrl?: string; icon?: ElementType; title: string }>) {
+  const theme = useTheme();
+  const isDarkMode = theme?.sanity?.v2?.color?._dark;
+
   const FinalIcon = icon ?? CiBoxList;
 
   return (
-    <StyledItemAssetWrapper>
-      {assetUrl &&
-        (/\.mp4$|\.mov$|\.avi$|\.wmv$|\.flv$|\.mkv$/.test(assetUrl) ? (
-          <video muted={true} loop={true} autoPlay={true} src={assetUrl} />
-        ) : (
-          <img src={assetUrl} alt="" />
-        ))}
-      {!assetUrl && (
-        <Flex align="center" justify="center" style={{ height: '100%' }}>
-          <FinalIcon />
-        </Flex>
-      )}
-    </StyledItemAssetWrapper>
+    <Stack>
+      <StyledItemAssetWrapper>
+        {assetUrl &&
+          (/\.mp4$|\.mov$|\.avi$|\.wmv$|\.flv$|\.mkv$/.test(assetUrl) ? (
+            <video muted={true} loop={true} autoPlay={true} src={assetUrl} />
+          ) : (
+            <img src={assetUrl} alt="" />
+          ))}
+        {!assetUrl && (
+          <Flex align="center" justify="center" style={{ height: '100%' }}>
+            <FinalIcon style={{ color: isDarkMode ? '#e3e4e8' : '#13141b' }} size={28} />
+          </Flex>
+        )}
+      </StyledItemAssetWrapper>
+      <Box paddingY={4} paddingX={4}>
+        <Text weight="medium" align="center">
+          {title}
+        </Text>
+      </Box>
+    </Stack>
   );
 }

@@ -9,13 +9,11 @@ interface Props {
 }
 
 const StyledItemGridCardWrapper = styled(Card)<{ $currentScheme?: 'light' | 'dark' }>`
-  --hover-bg: ${(props) => (props.$currentScheme === 'light' ? '#F2F3F5' : '#2A2C30')};
+  --hover-bg: ${(props) => (props.$currentScheme === 'light' ? '#f6f6f8' : '#1b1d27')};
 
   all: initial;
-  padding: 0.75em;
   border-radius: 0.1875rem;
-  grid-template-rows: auto 1fr;
-  gap: 0.75rem;
+  border: 1px solid var(--card-border-color);
 
   &:hover {
     background: var(--hover-bg);
@@ -33,7 +31,6 @@ export function ItemGridCardWrapper({
   return (
     <StyledItemGridCardWrapper
       {...props}
-      display="grid"
       role="button"
       tone="transparent"
       padding={2}

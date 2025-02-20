@@ -24,8 +24,11 @@ export function ItemGridCard({ item, onItemAdd }: Readonly<Props>) {
         onItemAdd({ itemsToAdd: itemVariant.itemsToAdd });
       }}
     >
-      <Text>{itemTitle}</Text>
-      <ItemAssetWrapper assetUrl={itemVariant.variantAssetUrl} icon={item.icon} />
+      <ItemAssetWrapper
+        title={itemTitle}
+        assetUrl={itemVariant.variantAssetUrl}
+        icon={item.icon}
+      />
     </ItemGridCardWrapper>
   );
 }
