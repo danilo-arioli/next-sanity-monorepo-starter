@@ -1,4 +1,4 @@
-import { Flex, Heading, Text } from '@sanity/ui';
+import { Flex, Heading, Stack, Text } from '@sanity/ui';
 import type { ItemGroup } from '../../types';
 
 export function ItemGroupHeading({
@@ -8,18 +8,16 @@ export function ItemGroupHeading({
   const IconComponent = itemGroup.icon;
 
   return (
-    <>
-      <Heading size={2}>
-        <Flex align="center" gap={3}>
-          {IconComponent && (
-            <IconComponent size={20} style={{ marginTop: showDescription ? '-11px' : '0' }} />
-          )}
-          <div>
-            {itemGroup.title}
-            {showDescription && itemGroup.description && <Text>{itemGroup.description}</Text>}
-          </div>
-        </Flex>
-      </Heading>
-    </>
+    <Stack space={4}>
+      <Flex gap={3} align="center">
+        {IconComponent && <IconComponent size={30} />}
+        <Heading size={2}>{itemGroup.title}</Heading>
+      </Flex>
+      {showDescription && itemGroup.description && (
+        <Text muted size={1} style={{ maxWidth: '50%' }}>
+          {itemGroup.description}
+        </Text>
+      )}
+    </Stack>
   );
 }
